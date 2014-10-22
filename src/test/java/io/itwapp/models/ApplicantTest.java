@@ -334,6 +334,43 @@ public class ApplicantTest {
         assertEquals("jerome@itwapp.io", applicant.mail);
         assertFalse(applicant.deleted);
         assertEquals(1, applicant.questions.length);
+        assertEquals("http://itwapp.io", applicant.callback);
+
+        Map<String, Object> parameter = new HashMap<String, Object>();
+        parameter.put("withApplicant", true);
+
+        Interview.delete(applicant.interview, parameter);
+
+        Applicant app = Applicant.findOne(applicant.id);
+        assertTrue(app.deleted);
+    }
+
+    @Test
+    public void r_testCreateWithQuestionAndCallback() throws InterruptedException {
+
+        Map<String, Object> question = new HashMap<String, Object>();
+        question.put("content", "question 1");
+        question.put("readingTime", 60);
+        question.put("answerTime", 60);
+        question.put("number", 1);
+
+        List<Map<String, Object>> questions = new ArrayList<Map<String, Object>>();
+        questions.add(question);
+
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("mail", "jerome@itwapp.io");
+        param.put("alert", false);
+        param.put("questions", questions);
+        param.put("lang", "en");
+        param.put("deadline", 1409045626568L);
+        param.put("callback", "http://mycustomeurl.com/done");
+
+        Applicant applicant = Applicant.create(param);
+
+        assertEquals("jerome@itwapp.io", applicant.mail);
+        assertFalse(applicant.deleted);
+        assertEquals(1, applicant.questions.length);
+        assertEquals("http://mycustomeurl.com/done", applicant.callback);
 
         Map<String, Object> parameter = new HashMap<String, Object>();
         parameter.put("withApplicant", true);

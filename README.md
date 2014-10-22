@@ -5,7 +5,7 @@ You can sign up for a InterviewApp account at http://itwapp.io.
 Requirements
 ============
 
-Java 1.5 and later.
+Java 1.6 and later.
 
 Installation
 ============

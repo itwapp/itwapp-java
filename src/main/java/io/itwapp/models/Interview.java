@@ -35,6 +35,11 @@ public class Interview {
      */
     public String text;
 
+    /**
+     * The redirection URL at the end of the interview.
+     */
+    public String callback;
+
 
     /**
      * This method retrieves all the interviews you created. These interviews will be returned sorted by creation date, the most recently created interview appearing on top of the list.
@@ -74,6 +79,16 @@ public class Interview {
         return gson.fromJson(json, Interview.class);
     }
 
+    /**
+     * @param interviewId
+     * @param param
+     * @return
+     * @throws UnauthorizedException
+     * @throws InvalidRequestError
+     * @throws ResourceNotFoundException
+     * @throws ServiceException
+     * @throws APIException
+     */
     public static Applicant[] findAllApplicant(String interviewId, Map<String, Object> param) throws UnauthorizedException, InvalidRequestError, ResourceNotFoundException, ServiceException, APIException {
         String json;
         if(param.containsKey("next"))   {

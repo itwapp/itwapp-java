@@ -544,6 +544,45 @@ public class InterviewTest {
         Interview interview = Interview.update(InterviewTest.interviewId, param);
 
         assertEquals(2, interview.questions.length);
+        assertEquals("http://itwapp.io", interview.callback);
+        assertEquals("question 1 - Updated", interview.questions[0].content);
+
+    }
+
+    @Test
+    public void q_testUpdateWithCallback()    {
+        assertNotNull(InterviewTest.interviewId);
+        Map<String, Object> param = new HashMap<String, Object>();
+
+        param.put("name", "interview 1");
+        param.put("video", "");
+        param.put("text", "");
+        param.put("callback", "http://myurl.com/done");
+
+        Map<String, Object> question = new HashMap<String, Object>();
+
+        question.put("content", "question 1 - Updated");
+        question.put("readingTime", 60);
+        question.put("answerTime", 60);
+        question.put("number", 1);
+
+        Map<String, Object> question2 = new HashMap<String, Object>();
+
+        question2.put("content", "question 2");
+        question2.put("readingTime", 60);
+        question2.put("answerTime", 60);
+        question2.put("number", 2);
+
+        List<Map<String, Object>> questions = new ArrayList<Map<String, Object>>();
+        questions.add(question);
+        questions.add(question2);
+
+        param.put("questions", questions);
+
+        Interview interview = Interview.update(InterviewTest.interviewId, param);
+
+        assertEquals(2, interview.questions.length);
+        assertEquals("http://myurl.com/done", interview.callback);
         assertEquals("question 1 - Updated", interview.questions[0].content);
 
     }
@@ -561,4 +600,40 @@ public class InterviewTest {
         assertEquals(InterviewTest.countInterview, interviews.length);
     }
 
+    @Test
+    public void t_testCreateWithCallback()    {
+
+        Map<String, Object> param = new HashMap<String, Object>();
+
+        param.put("name", "interview 1");
+        param.put("video", "");
+        param.put("text", "");
+        param.put("callback", "http://myurl.com/done");
+
+        Map<String, Object> question = new HashMap<String, Object>();
+
+        question.put("content", "question 1");
+        question.put("readingTime", 60);
+        question.put("answerTime", 60);
+        question.put("number", 1);
+
+        List<Map<String, Object>> questions = new ArrayList<Map<String, Object>>();
+        questions.add(question);
+
+        param.put("questions", questions);
+
+
+        Interview interview = Interview.create(param);
+
+        assertEquals(1, interview.questions.length);
+        InterviewTest.interviewId = interview.id;
+
+        assertEquals("http://myurl.com/done", interview.callback);
+    }
+
+    @Test
+    public void u_testDeleteWithCallback()    {
+        assertNotNull(InterviewTest.interviewId);
+        Interview.delete(InterviewTest.interviewId, new HashMap<String, Object>());
+    }
 }

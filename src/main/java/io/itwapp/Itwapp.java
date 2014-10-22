@@ -12,6 +12,7 @@ public abstract class Itwapp {
      * (FOR TESTING ONLY)
      * If you'd like your API requests to hit your own (mocked) server,
      * you can set this up here by overriding the base api URL.
+     * @param overriddenApiBase the new base api url
      */
     public static void overrideApiBase(final String overriddenApiBase) {
         apiBase = overriddenApiBase;

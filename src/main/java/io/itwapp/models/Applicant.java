@@ -91,6 +91,11 @@ public class Applicant {
      */
     public boolean deleted;
 
+    /**
+     * The redirection URL at the end of the interview.
+     */
+    public String callback;
+
     private static final Set<Integer> acceptedValue = new HashSet<Integer>(Arrays.asList(
             new Integer[] {60, 120, 180, 240, 300}
     ));
