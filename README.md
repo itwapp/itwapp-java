@@ -1,4 +1,4 @@
-# Itwapp Java Bindings
+# Itwapp Java Bindings [![Build Status](https://travis-ci.org/itwapp/itwapp-java.svg)](https://travis-ci.org/itwapp/itwapp-java)
 
 You can sign up for a InterviewApp account at http://itwapp.io.
 
