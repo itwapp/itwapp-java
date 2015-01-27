@@ -1,6 +1,7 @@
 package io.itwapp.models;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import io.itwapp.exception.*;
 import io.itwapp.rest.ApiRequest;
@@ -96,6 +97,11 @@ public class Applicant {
      */
     public String callback;
 
+    /**
+     * Applicant status. 3 completed, 2 in progress, 1 open email, 0 email sent, -1 unknown (email was not sent through Itwapp)
+     */
+    public ApplicantStatus status;
+
     private static final Set<Integer> acceptedValue = new HashSet<Integer>(Arrays.asList(
             new Integer[] {60, 120, 180, 240, 300}
     ));
@@ -148,7 +154,9 @@ public class Applicant {
 
         String json = ApiRequest.post("/api/v1/applicant/", param);
 
-        Gson gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(ApplicantStatus.class, new ApplicantStatusDeserializer());
+        Gson gson = gsonBuilder.create();
         return gson.fromJson(json, Applicant.class);
     }
 
@@ -177,7 +185,9 @@ public class Applicant {
      */
     public static Applicant findOne(String applicantId) throws UnauthorizedException, InvalidRequestError, ResourceNotFoundException, ServiceException, APIException {
         String json = ApiRequest.get("/api/v1/applicant/" + applicantId);
-        Gson gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(ApplicantStatus.class, new ApplicantStatusDeserializer());
+        Gson gson = gsonBuilder.create();
         return gson.fromJson(json, Applicant.class);
     }
 }
