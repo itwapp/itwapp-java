@@ -22,4 +22,9 @@ public class Response {
      */
     public int number;
 
+    /**
+     *  This is the thumbnail url for this video.
+     */
+    public String thumbnail;
+
 }
