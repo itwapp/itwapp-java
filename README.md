@@ -14,6 +14,9 @@ Installation
 
 Add this dependency to your project's POM:
 
+Snapshots (Repository https://oss.sonatype.org/content/repositories/snapshots/)
+
+
     <dependency>
       <groupId>io.itwapp</groupId>
       <artifactId>itwapp-java</artifactId>
