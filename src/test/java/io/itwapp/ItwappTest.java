@@ -28,9 +28,6 @@ public class ItwappTest {
 
     @Test
     public void a_auth()    {
-        assertNull(Itwapp.apiKey);
-        assertNull(Itwapp.secretKey);
-
         AccessToken accessToken = Itwapp.Authenticate(mail, password);
 
         assertEquals(itwappApiKey, accessToken.getApiKey());
