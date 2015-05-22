@@ -285,17 +285,7 @@ public class ApplicantTest {
     }
 
     @Test
-    public void o_testDelete() {
-        assertNotNull(ApplicantTest.applicantId);
-
-        Applicant.delete(ApplicantTest.applicantId);
-
-        Applicant applicant = Applicant.findOne(ApplicantTest.applicantId);
-        assertTrue(applicant.deleted);
-    }
-
-    @Test
-    public void p_testFindAllApplicant()  {
+    public void o_testFindAllApplicant()  {
         Applicant[] all = Interview.findAllApplicant(ApplicantTest.interviewId, new HashMap<String, Object>());
 
         assertEquals(1, all.length);
@@ -305,6 +295,16 @@ public class ApplicantTest {
         param.put("next", ApplicantTest.applicantId);
         Applicant[] empty_list = Interview.findAllApplicant(ApplicantTest.interviewId, param);
         assertEquals(0, empty_list.length);
+    }
+
+    @Test
+    public void p_testDelete() {
+        assertNotNull(ApplicantTest.applicantId);
+
+        Applicant.delete(ApplicantTest.applicantId);
+
+        Applicant applicant = Applicant.findOne(ApplicantTest.applicantId);
+        assertTrue(applicant.deleted);
     }
 
     @Test
@@ -387,7 +387,6 @@ public class ApplicantTest {
         Applicant app = Applicant.findOne(applicant.id);
         assertTrue(app.deleted);
     }
-
 
     @Test
     public void r_testCreateWithQuestionAndCallback() throws InterruptedException {

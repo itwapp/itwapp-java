@@ -40,6 +40,22 @@ public class Interview {
      */
     public String callback;
 
+    /**
+     * Number of invitation sent to pass this interview.
+     */
+    public int sent;
+
+    /**
+     * Number of applicant that have completed the interview.
+     */
+    public int answers;
+
+    /**
+     * Number of applicant not yet see.
+     */
+    @SerializedName("new")
+    public int news;
+
 
     /**
      * This method retrieves all the interviews you created. These interviews will be returned sorted by creation date, the most recently created interview appearing on top of the list.
