@@ -3,6 +3,7 @@ package io.itwapp.models;
 import io.itwapp.Itwapp;
 import io.itwapp.exception.InvalidRequestError;
 import org.hamcrest.CoreMatchers;
+import org.joda.time.DateTime;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -60,7 +61,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("interview", "53fb562418060018063095dd");
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
         
         Applicant.create(param);
     }
@@ -72,7 +73,7 @@ public class ApplicantTest {
         //param.put("alert", false);
         param.put("interview", "53fb562418060018063095dd");
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -84,7 +85,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("interview", "53fb562418060018063095dd");
         //param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -96,7 +97,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("interview", "53fb562418060018063095dd");
         param.put("lang", "en");
-        //param.put("deadline", 1409045626568L);
+        //param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -108,7 +109,7 @@ public class ApplicantTest {
         param.put("alert", false);
         //param.put("interview", "53fb562418060018063095dd");
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -121,7 +122,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", "");
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
 
@@ -144,7 +145,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -158,7 +159,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -179,7 +180,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -200,7 +201,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -221,7 +222,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -242,7 +243,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -263,7 +264,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant.create(param);
     }
@@ -275,7 +276,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("interview", ApplicantTest.interviewId);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant applicant = Applicant.create(param);
 
@@ -324,7 +325,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
 
         Applicant applicant = Applicant.create(param);
 
@@ -364,7 +365,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
         param.put("interviewName", "My Super Interview");
 
         Applicant applicant = Applicant.create(param);
@@ -405,7 +406,7 @@ public class ApplicantTest {
         param.put("alert", false);
         param.put("questions", questions);
         param.put("lang", "en");
-        param.put("deadline", 1409045626568L);
+        param.put("deadline", (new DateTime()).plusMonths(1).getMillis());
         param.put("callback", "http://mycustomeurl.com/done");
 
         Applicant applicant = Applicant.create(param);
