@@ -2,7 +2,7 @@ package io.itwapp.models;
 
 import io.itwapp.Itwapp;
 import io.itwapp.exception.InvalidRequestError;
-import org.hamcrest.CoreMatchers;
+
 import org.joda.time.DateTime;
 import org.junit.*;
 import org.junit.runners.MethodSorters;

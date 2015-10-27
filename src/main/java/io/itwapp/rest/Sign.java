@@ -24,7 +24,7 @@ public abstract class Sign {
     }
 
     private static String md5(String s) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest m = java.security.MessageDigest.getInstance("MD5");
+        MessageDigest m = MessageDigest.getInstance("MD5");
         byte[] b = s.getBytes("UTF-8");
         m.update(b, 0, b.length);
         String md = new java.math.BigInteger(1, m.digest()).toString(16);

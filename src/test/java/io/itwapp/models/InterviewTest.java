@@ -5,7 +5,6 @@ import io.itwapp.exception.InvalidRequestError;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
 import org.junit.FixMethodOrder;
 
 import java.util.*;
@@ -26,8 +25,12 @@ public class InterviewTest {
 
     @Test
     public void a_testFindAll()    {
-        Interview[] res = Interview.findAll(new HashMap<String, Object>());
-        InterviewTest.countInterview =  res.length;
+        try {
+            Interview[] res = Interview.findAll(new HashMap<String, Object>());
+            InterviewTest.countInterview =  res.length;
+        }catch(Exception e) {
+            fail();
+        }
     }
 
     @Test(expected = InvalidRequestError.class)
