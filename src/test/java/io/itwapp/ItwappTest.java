@@ -16,6 +16,7 @@ public class ItwappTest {
 
     private final static String itwappApiKey = System.getenv("itwappApiKey");
     private final static String itwappApiSecret = System.getenv("itwappApiSecret");
+    private final static String companyId = System.getenv("itwappCompanyId");
 
     @BeforeClass
     public static void setUpBeforeClass()  {
@@ -28,10 +29,22 @@ public class ItwappTest {
 
     @Test
     public void a_auth()    {
-        AccessToken accessToken = Itwapp.Authenticate(mail, password);
+        AccessToken[] accessToken = Itwapp.Authenticate(mail, password);
 
-        assertEquals(itwappApiKey, accessToken.getApiKey());
-        assertEquals(itwappApiSecret, accessToken.getSecretKey());
+        AccessToken maybeAccessToken = findAccessTokenInArrayWithCompanyId(accessToken, companyId);
+        assertNotNull(maybeAccessToken);
+
+        assertEquals(itwappApiKey, maybeAccessToken.getApiKey());
+        assertEquals(itwappApiSecret, maybeAccessToken.getSecretKey());
+    }
+
+    private AccessToken findAccessTokenInArrayWithCompanyId(AccessToken[] accessTokens, String companyId) {
+        for(AccessToken accessToken : accessTokens) {
+            if(accessToken.getCompany().compareTo(companyId) == 0) {
+                return accessToken;
+            }
+        }
+        return null;
     }
 
 }

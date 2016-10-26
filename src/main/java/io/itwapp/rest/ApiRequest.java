@@ -36,11 +36,7 @@ public abstract class ApiRequest {
             Future<Response> f = asyncHttpClient.prepareGet(Itwapp.getApiBase() + signedRequest).execute();
             Response r = f.get();
             return parseResult(r);
-        } catch (InterruptedException e) {
-            throw new APIException(e);
-        } catch (ExecutionException e) {
-            throw new APIException(e);
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new APIException(e);
         }
     }
@@ -72,11 +68,7 @@ public abstract class ApiRequest {
                     .execute();
             Response r = f.get();
             return parseResult(r);
-        } catch (InterruptedException e) {
-            throw new APIException(e);
-        } catch (ExecutionException e) {
-            throw new APIException(e);
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new APIException(e);
         }
     }
@@ -108,11 +100,7 @@ public abstract class ApiRequest {
                     .execute();
             Response r = f.get();
             return parseResult(r);
-        } catch (InterruptedException e) {
-            throw new APIException(e);
-        } catch (ExecutionException e) {
-            throw new APIException(e);
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new APIException(e);
         }
 
@@ -136,11 +124,7 @@ public abstract class ApiRequest {
             Future<Response> f = asyncHttpClient.prepareDelete(Itwapp.getApiBase() + signedRequest).execute();
             Response r = f.get();
             return parseResult(r);
-        } catch (InterruptedException e) {
-            throw new APIException(e);
-        } catch (ExecutionException e) {
-            throw new APIException(e);
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new APIException(e);
         }
     }
@@ -201,11 +185,7 @@ public abstract class ApiRequest {
             url.append(signature);
 
             return url.toString();
-        } catch (UnsupportedEncodingException e) {
-            throw new APIException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new APIException(e);
-        } catch (InvalidKeyException e) {
+        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException e) {
             throw new APIException(e);
         }
     }

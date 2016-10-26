@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 
 public abstract class Itwapp {
 
-    public static final String LIVE_API_BASE = "http://itwapp.io";
+    public static final String LIVE_API_BASE = "https://itwapp.io";
     public static volatile String apiKey;
     public static volatile String secretKey;
 
@@ -41,7 +41,7 @@ public abstract class Itwapp {
      * @param password
      * @throws UnauthorizedException when auth fails
      */
-    public static AccessToken Authenticate(String mail, String password)   {
+    public static AccessToken[] Authenticate(String mail, String password)   {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
         Map<String, Object> body = new HashMap<String, Object>();
@@ -60,7 +60,7 @@ public abstract class Itwapp {
            switch (response.getStatusCode())   {
                 case 200:
                     try {
-                        return gson.fromJson(response.getResponseBody(), AccessToken.class);
+                        return gson.fromJson(response.getResponseBody(), AccessToken[].class);
                     } catch (IOException e) {
                         throw new APIException(e);
                     }
@@ -75,11 +75,7 @@ public abstract class Itwapp {
                 default:
                     throw new ServiceException();
             }
-        } catch (InterruptedException e) {
-            throw new APIException(e);
-        } catch (ExecutionException e) {
-            throw new APIException(e);
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new APIException(e);
         }
     }

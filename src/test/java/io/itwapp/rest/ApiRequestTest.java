@@ -53,9 +53,7 @@ public class ApiRequestTest {
         String result = null;
         try {
             result = (String) m.invoke(null, "GET", "/api/v1/test/");
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             fail();
         }
 
@@ -76,9 +74,7 @@ public class ApiRequestTest {
         String result = null;
         try {
             result = (String) m.invoke(null, "GET", "/api/v1/test/?foo=bar");
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             fail();
         }
 
@@ -101,26 +97,14 @@ public class ApiRequestTest {
         try {
             Future<Response> f = asyncHttpClient.prepareGet(Itwapp.getApiBase() + "/api/v1/applicant/12").execute();
             r = f.get();
-        } catch (InterruptedException e) {
-            fail();
-        } catch (ExecutionException e) {
-            fail();
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             fail();
         }
 
         // Service should respond not authorized
         assertEquals(401, r.getStatusCode());
 
-        try {
-            m.invoke(null, r);
-            fail();
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
-            throw e.getCause();
-        }
-
+        invokeAndRaiseExceptionOrFail(m, r);
     }
 
     @Test(expected = ResourceNotFoundException.class)
@@ -138,25 +122,14 @@ public class ApiRequestTest {
         try {
             Future<Response> f = asyncHttpClient.prepareGet(Itwapp.getApiBase() + "/api/v1/not_found_page").execute();
             r = f.get();
-        } catch (InterruptedException e) {
-            fail();
-        } catch (ExecutionException e) {
-            fail();
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             fail();
         }
 
         // Service should respond not authorized
         assertEquals(404, r.getStatusCode());
 
-        try {
-            m.invoke(null, r);
-            fail();
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
-            throw e.getCause();
-        }
+        invokeAndRaiseExceptionOrFail(m, r);
     }
 
     @Test(expected = InvalidRequestError.class)
@@ -174,9 +147,7 @@ public class ApiRequestTest {
         String result = null;
         try {
             result = (String) m.invoke(null, "POST", "/api/v1/applicant/");
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             fail();
         }
 
@@ -193,27 +164,18 @@ public class ApiRequestTest {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         Response r = null;
         try {
-            Future<Response> f = asyncHttpClient.preparePost(Itwapp.getApiBase() + result).execute();
+            Future<Response> f = asyncHttpClient.preparePost(Itwapp.getApiBase() + result)
+                    .setHeader("Content-Type", "application/json")
+                    .execute();
             r = f.get();
-        } catch (InterruptedException e) {
-            fail();
-        } catch (ExecutionException e) {
-            fail();
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             fail();
         }
 
         // Service should respond not authorized
         assertEquals(400, r.getStatusCode());
 
-        try {
-            m.invoke(null, r);
-            fail();
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
-            throw e.getCause();
-        }
+        invokeAndRaiseExceptionOrFail(m, r);
     }
 
     @Test
@@ -231,9 +193,7 @@ public class ApiRequestTest {
         String result = null;
         try {
             result = (String) m.invoke(null, "GET", "/api/v1/interview/");
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             fail();
         }
 
@@ -252,11 +212,7 @@ public class ApiRequestTest {
         try {
             Future<Response> f = asyncHttpClient.prepareGet(Itwapp.getApiBase() + result).execute();
             r = f.get();
-        } catch (InterruptedException e) {
-            fail();
-        } catch (ExecutionException e) {
-            fail();
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
             fail();
         }
 
@@ -268,11 +224,7 @@ public class ApiRequestTest {
             JsonElement element = new JsonParser().parse(json);
             assertTrue(element.isJsonArray());
 
-        } catch (IllegalAccessException e) {
-            fail();
-        } catch (InvocationTargetException e) {
-            fail();
-        } catch (JsonSyntaxException jse) {
+        } catch (IllegalAccessException | InvocationTargetException | JsonSyntaxException e) {
             fail();
         }
 
@@ -289,20 +241,20 @@ public class ApiRequestTest {
     @Test
     public void f_testPostRequest()    {
 
-        Map<String, Object> param = new HashMap<String, Object>();
+        Map<String, Object> param = new HashMap<>();
 
         param.put("name", "interview 1");
         param.put("video", "");
         param.put("text", "");
 
-        Map<String, Object> question = new HashMap<String, Object>();
+        Map<String, Object> question = new HashMap<>();
 
         question.put("content", "question 1");
         question.put("readingTime", 60);
         question.put("answerTime", 60);
         question.put("number", 1);
 
-        List<Map<String, Object>> questions = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> questions = new ArrayList<>();
         questions.add(question);
 
         param.put("questions", questions);
@@ -322,20 +274,20 @@ public class ApiRequestTest {
     public void g_testPutRequest()    {
         assertNotNull(ApiRequestTest.interviewId);
 
-        Map<String, Object> param = new HashMap<String, Object>();
+        Map<String, Object> param = new HashMap<>();
 
         param.put("name", "interview 1");
         param.put("video", "");
         param.put("text", "");
 
-        Map<String, Object> question = new HashMap<String, Object>();
+        Map<String, Object> question = new HashMap<>();
 
         question.put("content", "question 1 - Updated");
         question.put("readingTime", 60);
         question.put("answerTime", 60);
         question.put("number", 1);
 
-        List<Map<String, Object>> questions = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> questions = new ArrayList<>();
         questions.add(question);
 
         param.put("questions", questions);
@@ -352,6 +304,17 @@ public class ApiRequestTest {
 
         String res = ApiRequest.delete("/api/v1/interview/" + ApiRequestTest.interviewId);
         assertEquals("", res);
+    }
+
+    private void invokeAndRaiseExceptionOrFail(Method m, Response r) throws Throwable {
+        try {
+            m.invoke(null, r);
+            fail();
+        } catch (IllegalAccessException e) {
+            fail();
+        } catch (InvocationTargetException e) {
+            throw e.getCause();
+        }
     }
 
 }
