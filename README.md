@@ -1,6 +1,6 @@
 # Itwapp Java Bindings [![Build Status](https://travis-ci.org/itwapp/itwapp-java.svg)](https://travis-ci.org/itwapp/itwapp-java)
 
-You can sign up for a InterviewApp account at http://itwapp.io.
+You can sign up for a InterviewApp account at https://itwapp.io.
 
 Requirements
 ============
@@ -38,9 +38,9 @@ ItwappExample.java
         public static void main(String[] args) {
             Itwapp.apiKey = "YOUR-API-KEY";
             Itwapp.secretKey = "YOUR-SECRET-KEY";
-            
+
             Interview[] res = Interview.findAll(new HashMap<String, Object>());
-            
+
         }
     }
 

@@ -160,6 +160,30 @@ public class Applicant {
     }
 
     /**
+     * This endpoint updates an applicant. If successful, it returns the updated applicant.
+     * @param applicantId The ID of the applicant to update
+     * @param param
+     * @return the updated applicant
+     * @throws UnauthorizedException
+     * @throws InvalidRequestError
+     * @throws ResourceNotFoundException
+     * @throws ServiceException
+     * @throws APIException
+     */
+
+     public static Applicant update(String applicantId, Map<String, Object> param) throws UnauthorizedException, InvalidRequestError, ResourceNotFoundException, ServiceException, APIException {
+       if(param.isEmpty()){
+         throw new InvalidRequestError("no param found");
+       }else{
+         String json = ApiRequest.put("/api/v1/applicant/" + applicantId, param);
+         GsonBuilder gsonBuilder = new GsonBuilder();
+         gsonBuilder.registerTypeAdapter(ApplicantStatus.class, new ApplicantStatusDeserializer());
+         Gson gson =  gsonBuilder.create();
+         return gson.fromJson(json, Applicant.class);
+       }
+     }
+
+    /**
      * This method deletes a specific applicant.
      * @param applicantId The ID of the applicant to delete
      * @throws UnauthorizedException
